@@ -40,7 +40,9 @@ class _HomeScreenState extends State<HomeScreen> {
         title: Text('To-Do List'),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () {
+          Navigator.pushNamed(context, '/addEdit');
+        },
         child: Icon(Icons.add),
       ),
       body: Column(

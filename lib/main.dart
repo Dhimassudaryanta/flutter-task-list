@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:task_list/views/addEdit_screen.dart';
 import 'package:task_list/views/detail_screen.dart';
 import 'package:task_list/views/home_screen.dart';
 
@@ -21,6 +22,7 @@ class MyApp extends StatelessWidget {
       routes: {
         '/': (context) => HomeScreen(),
         '/details': (context) => DetailScreen(),
+        '/addEdit': (context) => AddEditScreen(),
       },
     );
   }
