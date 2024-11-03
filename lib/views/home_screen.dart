@@ -65,6 +65,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       itemBuilder: (context, index) {
                         final todo = snapshot.data![index];
                         return ListTile(
+                          onTap: () => Navigator.pushNamed(context, '/details'),
                           title: Text(todo.title),
                           trailing: Icon(
                             todo.isCompleted ? Icons.check : Icons.clear,

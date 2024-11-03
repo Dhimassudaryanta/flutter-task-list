@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:task_list/views/detail_screen.dart';
 import 'package:task_list/views/home_screen.dart';
 
 void main() {
@@ -16,7 +17,11 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.teal,
       ),
-      home: HomeScreen(),
+      // home: HomeScreen(),
+      routes: {
+        '/': (context) => HomeScreen(),
+        '/details': (context) => DetailScreen(),
+      },
     );
   }
 }
