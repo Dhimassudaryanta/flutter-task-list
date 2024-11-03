@@ -1,10 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:task_list/models/task.dart';
 import 'package:task_list/views/addEdit_screen.dart';
 import 'package:task_list/views/detail_screen.dart';
 import 'package:task_list/views/home_screen.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(
+    ChangeNotifierProvider(
+      create: (context) => TaskNotifier(),
+      child: MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
