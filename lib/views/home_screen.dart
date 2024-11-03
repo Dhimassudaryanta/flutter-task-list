@@ -14,8 +14,9 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     super.initState();
-    // Call your function here
-    fetchData();
+    fetchData().then((tasks) {
+      context.read<TaskNotifier>().setTasks(tasks);
+    });
   }
 
   List<Task> task = [];
@@ -64,9 +65,9 @@ class _HomeScreenState extends State<HomeScreen> {
                       return Text('Error: ${snapshot.error}');
                     } else if (snapshot.hasData) {
                       return ListView.builder(
-                        itemCount: snapshot.data!.length,
+                        itemCount: value.task!.length,
                         itemBuilder: (context, index) {
-                          final todo = snapshot.data![index];
+                          final todo = value.task![index];
                           return Container(
                             margin: EdgeInsets.symmetric(
                                 horizontal: 16, vertical: 8),
