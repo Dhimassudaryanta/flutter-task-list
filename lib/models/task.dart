@@ -6,40 +6,22 @@ import 'package:http/http.dart' as http;
 class Task {
   int id;
   String title;
+  String description;
   bool isCompleted;
 
   Task({
     this.id = 1,
     this.title = '',
+    this.description = '',
     this.isCompleted = false,
   });
 
   factory Task.fromJson(Map<String, dynamic> json) {
     return Task(
-      id: json['userId'],
+      id: json['userId'] as int,
       title: json['title'],
+      description: json['description'],
       isCompleted: json['completed'],
     );
-  }
-}
-
-class TaskNotifier with ChangeNotifier {
-  List<Task> _tasks = [];
-  List<Task> get task => _tasks;
-
-  void addTask(Task task) {
-    print(task);
-    _tasks.add(task);
-    notifyListeners();
-  }
-
-  void removeTask(Task task) {
-    _tasks.remove(task);
-    notifyListeners();
-  }
-
-  void setTasks(List<Task> tasks) {
-    _tasks = tasks;
-    notifyListeners();
   }
 }

@@ -10,6 +10,14 @@ class DetailScreen extends StatefulWidget {
 class _DetailScreenState extends State<DetailScreen> {
   @override
   Widget build(BuildContext context) {
+    final arguments = (ModalRoute.of(context)?.settings.arguments ??
+        <String, dynamic>{}) as Map;
+
+    final String title = arguments?['data']?.title ?? 'Default Title';
+    final String description =
+        arguments?['data']?.description ?? 'Default Description';
+
+    print(arguments['data'].title);
     return Scaffold(
       appBar: AppBar(
         title: Text('Details'),
@@ -22,7 +30,7 @@ class _DetailScreenState extends State<DetailScreen> {
             Container(
               margin: EdgeInsets.all(8.0),
               child: Text(
-                'This is title',
+                '$title',
                 style: TextStyle(
                   fontWeight: FontWeight.w600,
                   fontSize: 24,
@@ -32,7 +40,7 @@ class _DetailScreenState extends State<DetailScreen> {
             Container(
               margin: EdgeInsets.all(8.0),
               child: Text(
-                'This is description',
+                '$description',
                 style: TextStyle(
                   fontWeight: FontWeight.w500,
                   fontSize: 20,

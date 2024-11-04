@@ -3,7 +3,8 @@ import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
 import 'dart:convert';
 
-import 'package:task_list/models/task.dart'; // For JSON encoding/decoding
+import 'package:task_list/models/task.dart';
+import 'package:task_list/notifiers/task_notifier.dart'; // For JSON encoding/decoding
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -23,8 +24,8 @@ class _HomeScreenState extends State<HomeScreen> {
   bool isListLoading = false;
 
   Future<List<Task>> fetchData() async {
-    final response = await http
-        .get(Uri.parse('https://jsonplaceholder.typicode.com/todos?_limit=15'));
+    final response = await http.get(Uri.parse(
+        'https://67283e78270bd0b97554c5cf.mockapi.io/api/v1/todos?page=1&limit=15'));
     if (response.statusCode == 200) {
       List<dynamic> jsonArray = jsonDecode(response.body);
 
@@ -76,8 +77,13 @@ class _HomeScreenState extends State<HomeScreen> {
                                 side: BorderSide(color: Colors.teal, width: 1),
                                 borderRadius: BorderRadius.circular(5),
                               ),
-                              onTap: () =>
-                                  Navigator.pushNamed(context, '/details'),
+                              onTap: () => Navigator.pushNamed(
+                                context,
+                                '/details',
+                                arguments: {
+                                  'data': value.task![index],
+                                },
+                              ),
                               title: Text(todo.title),
                               trailing: Icon(
                                 todo.isCompleted ? Icons.check : Icons.clear,
