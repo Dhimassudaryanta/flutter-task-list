@@ -16,6 +16,7 @@ class _DetailScreenState extends State<DetailScreen> {
     final String title = arguments?['data']?.title ?? 'Default Title';
     final String description =
         arguments?['data']?.description ?? 'Default Description';
+    final bool completed = arguments?['data']?.isCompleted ?? false;
 
     print(arguments['data'].title);
     return Scaffold(
@@ -28,7 +29,7 @@ class _DetailScreenState extends State<DetailScreen> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Container(
-              margin: EdgeInsets.all(8.0),
+              margin: EdgeInsets.only(right: 20.0, left: 20.0, top: 32.0),
               child: Text(
                 '$title',
                 style: TextStyle(
@@ -38,26 +39,28 @@ class _DetailScreenState extends State<DetailScreen> {
               ),
             ),
             Container(
-              margin: EdgeInsets.all(8.0),
+              margin: EdgeInsets.only(right: 20.0, left: 20.0, top: 36.0),
               child: Text(
                 '$description',
                 style: TextStyle(
                   fontWeight: FontWeight.w500,
-                  fontSize: 20,
+                  color: Colors.grey,
+                  fontSize: 16,
                 ),
               ),
             ),
             Container(
-              margin: EdgeInsets.all(8.0),
+              margin: EdgeInsets.only(right: 20.0, left: 20.0, top: 50.0),
               child: Row(
+                mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   Text(
                     'Is Completed ?',
-                    style: TextStyle(fontWeight: FontWeight.w600, fontSize: 16),
+                    style: TextStyle(fontWeight: FontWeight.w500, fontSize: 14),
                   ),
                   Icon(
-                    Icons.check,
-                    color: Colors.green,
+                    completed ? Icons.check_circle : Icons.clear_rounded,
+                    color: completed ? Colors.green : Colors.red,
                   ),
                 ],
               ),

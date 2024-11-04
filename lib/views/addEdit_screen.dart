@@ -39,7 +39,7 @@ class _AddEditScreenState extends State<AddEditScreen> {
   Future<Task> postTodos() async {
     try {
       final response = await http.post(
-        Uri.parse('https://jsonplaceholder.typicode.com/todos'),
+        Uri.parse('https://67283e78270bd0b97554c5cf.mockapi.io/api/v1/todos'),
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8',
         },
@@ -47,7 +47,6 @@ class _AddEditScreenState extends State<AddEditScreen> {
           'title': title,
           'body': description,
           'completed': isChecked,
-          'userId': 1,
         }),
       );
 
