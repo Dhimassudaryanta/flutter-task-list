@@ -17,7 +17,13 @@ class _HomeScreenState extends State<HomeScreen> {
     super.initState();
     fetchData().then((tasks) {
       context.read<TaskNotifier>().setTasks(tasks);
+    }).catchError((error) {
+      // Handle the error, maybe show a snackbar
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Failed to load tasks')),
+      );
     });
+    ;
   }
 
   List<Task> task = [];
@@ -53,25 +59,18 @@ class _HomeScreenState extends State<HomeScreen> {
           children: [
             Container(
               child: Expanded(
-                child: FutureBuilder<List<Task>>(
-                  future: fetchData(),
-                  builder: (context, snapshot) {
-                    if (snapshot.connectionState == ConnectionState.waiting) {
-                      return (SizedBox(
-                        child: Center(
-                          child: CircularProgressIndicator(),
-                        ),
-                      ));
-                    } else if (snapshot.hasError) {
-                      return Text('Error: ${snapshot.error}');
-                    } else if (snapshot.hasData) {
-                      return ListView.builder(
+                child: value.task.length == 0
+                    ? Center(child: CircularProgressIndicator())
+                    : ListView.builder(
                         itemCount: value.task!.length,
                         itemBuilder: (context, index) {
                           final todo = value.task![index];
                           return Container(
-                            margin: EdgeInsets.symmetric(
-                                horizontal: 16, vertical: 8),
+                            margin: EdgeInsets.only(
+                                right: 16,
+                                left: 16,
+                                top: index == 0 ? 32 : 8,
+                                bottom: 8),
                             child: ListTile(
                               shape: RoundedRectangleBorder(
                                 side: BorderSide(color: Colors.teal, width: 1),
@@ -94,11 +93,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             ),
                           );
                         },
-                      );
-                    }
-                    return Text('No data');
-                  },
-                ),
+                      ),
               ),
             ),
           ],
